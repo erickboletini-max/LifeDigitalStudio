@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Digital Studio | Sites, lojas online e sistemas de delivery</title>
+<meta name="description" content="Desenvolvemos sites, lojas online, cardápios digitais e sistemas de delivery com PDV para pequenos negócios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --surface:#0a0c10; --line:#1a2230; --text:#e8edf7; --muted:#8d98ad;
+  --accent:#38bdf8; --accent-ink:#04202e;
+  --danger:#ef4444; --success:#22c55e;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--text);font:400 1.0625rem/1.65 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.025em}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:700;margin-bottom:12px}
+h3{font-size:1.3rem;font-weight:700}
+.mono{font-family:var(--mono)}
+.btn{display:inline-block;padding:13px 24px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:500;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:none;border:1px solid var(--line);color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent)}
+
+/* HEADER CORRIGIDO E BEM DISTRIBUÍDO */
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:5}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;text-decoration:none;white-space:nowrap}
+.mark{width:30px;height:30px;border-radius:7px;border:1px solid var(--accent);display:grid;place-items:center;font:500 .8rem var(--mono);color:var(--accent)}
+header nav{display:flex;align-items:center;gap:20px}
+nav a{text-decoration:none;color:var(--muted);font-size:.92rem;white-space:nowrap;transition:color .2s ease}
+nav a:hover{color:var(--text)}
+
+.hero{padding:88px 0}
+#fluxo{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+.hero p{color:var(--muted);margin-top:20px;max-width:50ch;font-size:1.15rem}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.term{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.term .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);font:400 .8rem var(--mono);color:var(--muted)}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.term .bar span{margin-left:8px}
+.term pre{padding:20px;font:400 .92rem/1.8 var(--mono);color:var(--muted);overflow-x:auto}
+.term .k{color:#7dd3fc}.term .s{color:#86efac}.term .ok{color:#fcd34d}
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(0,0,0,.7);padding:22px 0}
+.marquee .track{display:flex;width:max-content;animation:deslizar 28s linear infinite}
+.marquee .grupo{display:flex;align-items:center;flex-shrink:0}
+.marquee .grupo span{font:700 clamp(2rem,6vw,4.2rem)/1 var(--display);letter-spacing:-.03em;white-space:nowrap;padding:0 .35em}
+.marquee .grupo span:nth-of-type(even){color:transparent;-webkit-text-stroke:1.5px var(--accent)}
+.marquee .grupo b{font:500 clamp(1.2rem,3vw,2rem) var(--mono);color:var(--accent)}
+@keyframes deslizar{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee .track{animation-duration:60s}}
+section{padding:88px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);max-width:58ch;margin-bottom:44px}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.service{background:var(--surface);padding:28px}
+.service p{color:var(--muted);margin-top:10px;font-size:1rem}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:44px}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px;text-align:center}
+.stat-card .num{font:700 clamp(2.5rem,4vw,3.5rem)/1 var(--display);color:var(--accent);margin-bottom:8px}
+.stat-card p{color:var(--muted);font-size:.95rem}
+
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.benefit-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px}
+.benefit-card .icon{font-size:1.8rem;margin-bottom:14px;display:inline-block;color:var(--accent)}
+.benefit-card h3{margin-bottom:10px}
+.benefit-card p{color:var(--muted);font-size:.98rem}
+
+.compare-container{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.compare-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px}
+.compare-box.bad{border-color:rgba(239,68,68,.3)}
+.compare-box.good{border-color:rgba(34,197,94,.3);background:linear-gradient(180deg,var(--surface) 0%,rgba(56,189,248,.03) 100%)}
+.compare-box h3{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.compare-box.bad h3{color:var(--danger)}
+.compare-box.good h3{color:var(--success)}
+.compare-list{list-style:none;padding:0}
+.compare-list li{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;color:var(--muted);font-size:.98rem}
+.compare-list li:last-child{margin-bottom:0}
+.compare-list .icon-mark{font-weight:700;font-family:var(--mono)}
+.compare-box.bad .icon-mark{color:var(--danger)}
+.compare-box.good .icon-mark{color:var(--success)}
+.compare-box.good li strong{color:var(--text)}
+
+.project{display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center;margin-bottom:72px}
+.project:nth-of-type(even){grid-template-columns:1fr 1.35fr}
+.project:nth-of-type(even) .shotbox{order:2}
+.project:last-child{margin-bottom:0}
+.shotbox{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.shotbox .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.shotbox .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.shotbox .bar span{margin-left:10px;flex:1;padding:3px 12px;border-radius:6px;background:var(--bg);font:400 .75rem var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot{position:relative;aspect-ratio:16/10;overflow:hidden;container-type:inline-size}
+.shot .cover{position:absolute;inset:0;z-index:3}
+.shot video.real,.shot img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;z-index:2}
+.shot video.real{background:#000;object-fit:contain;object-position:center}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tags span{font:400 .8rem var(--mono);padding:4px 10px;border-radius:6px;border:1px solid var(--line);color:var(--accent)}
+.project p{color:var(--muted);margin-bottom:20px}
+.link{color:var(--accent);font-weight:500;text-underline-offset:4px}
+/* mock: nail */
+.m-nail{background:#fbf1ee;color:#4a2a33;padding:4cqw 5cqw;display:flex;flex-direction:column;gap:3cqw}
+.m-nail .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:2.4cqw}
+.m-nail .pill{background:#b8607a;color:#fff;border-radius:99px;padding:.7cqw 2.4cqw;font-size:2cqw;font-weight:500}
+.m-nail .body{display:flex;gap:4cqw;align-items:center;flex:1}
+.m-nail h4{font-family:var(--display);font-size:5.2cqw;line-height:1.1;letter-spacing:-.02em;margin:0}
+.m-nail small{display:block;font-size:2.1cqw;color:#7d5560;margin-top:1.6cqw}
+.m-nail .gal{display:flex;gap:1.8cqw;margin-left:auto}
+.m-nail .gal b{width:7cqw;height:17cqw;border-radius:3.6cqw 3.6cqw 2cqw 2cqw}
+.m-nail .chips{display:flex;gap:1.8cqw}
+.m-nail .chips span{background:#fff;border-radius:1.6cqw;padding:1.1cqw 2cqw;font-size:1.9cqw;font-weight:500}
+/* mock: adega */
+.m-adega{background:#15110e;color:#f3e7d8;padding:4cqw 5cqw;display:flex;flex-direction:column;gap:2.6cqw}
+.m-adega .top{display:flex;align-items:center;gap:2cqw;font-weight:700;font-size:2.4cqw}
+.m-adega .dot{width:5cqw;height:5cqw;border-radius:50%;background:#c58a2b}
+.m-adega .open{margin-left:auto;font-size:1.8cqw;color:#86efac;border:1px solid #2f5a3c;border-radius:99px;padding:.5cqw 1.8cqw}
+.m-adega h4{font-family:var(--display);font-size:4.6cqw;line-height:1.1;letter-spacing:-.02em;margin:0;max-width:22ch}
+.m-adega .cats{display:flex;gap:1.6cqw}
+.m-adega .cats span{border:1px solid #3a2f25;border-radius:99px;padding:.8cqw 2cqw;font-size:1.8cqw;color:#c9b8a3}
+.m-adega .cats span:first-child{background:#c58a2b;color:#15110e;border-color:#c58a2b}
+.m-adega .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2cqw}
+.m-adega .grid div{background:#211a14;border-radius:1.6cqw;height:11cqw;padding:1.6cqw;display:flex;flex-direction:column;justify-content:flex-end;gap:1cqw}
+.m-adega .grid i{display:block;height:1cqw;border-radius:1cqw;background:#3a2f25}
+.m-adega .grid i+i{width:50%;background:#c58a2b}
+.m-adega .cart{position:absolute;left:5cqw;right:5cqw;bottom:3cqw;background:#c58a2b;color:#15110e;border-radius:2cqw;padding:1.6cqw 2.6cqw;font-size:2cqw;font-weight:700;display:flex;justify-content:space-between}
+.scroll{animation:rolar 14s ease-in-out infinite}
+.screen{height:62.5cqw}
+@keyframes rolar{0%,12%{transform:translateY(0)}42%,58%{transform:translateY(-50%)}88%,100%{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.scroll{animation:none}}
+.m-nail.s2 h4{font-size:3.6cqw}
+.m-nail .rows{display:flex;flex-direction:column;gap:1.6cqw;margin-top:1cqw}
+.m-nail .rows div{background:#fff;border-radius:1.8cqw;padding:1.6cqw 2.4cqw;display:flex;justify-content:space-between;font-size:2.3cqw;font-weight:500}
+.m-nail .rows b{color:#b8607a}
+.m-adega.s2 h4{font-size:3.6cqw}
+.m-adega.s2 .grid{gap:2cqw}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px}
+.plan.main{border-color:var(--accent)}
+.price{font:500 2rem var(--mono);color:var(--accent);margin:12px 0 8px}
+.plan p{color:var(--muted);font-size:1rem}
+footer{padding:32px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+@media (max-width:960px){
+  .hero .wrap,.project,.project:nth-of-type(even),.compare-container{grid-template-columns:1fr;gap:28px}
+  .project:nth-of-type(even) .shotbox{order:0}
+  .hero{padding:56px 0}
+  header nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="fluxo" aria-hidden="true"></canvas>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#topo"><span class="mark">LD</span>Life Digital Studio</a>
+    <nav>
+      <a href="#vantagens">Vantagens</a>
+      <a href="#comparativo">Comparativo</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#precos">Preços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Tecnologia que coloca o seu negócio na internet.</h1>
+        <p>Desenvolvemos sites, lojas online, cardápios digitais e sistemas de delivery com PDV. Seus clientes fazem o pedido e você recebe no WhatsApp.</p>
+        <div class="actions">
+          <a class="btn" data-wa href="#">Pedir meu site</a>
+          <a class="btn ghost" href="#projetos">Ver projetos</a>
+        </div>
+      </div>
+      <div class="term" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i><span>pedido.json</span></div>
+<pre>{
+  <span class="k">"origem"</span>: <span class="s">"site"</span>,
+  <span class="k">"cliente"</span>: <span class="s">"Maria"</span>,
+  <span class="k">"pagamento"</span>: <span class="s">"pix"</span>,
+  <span class="k">"aviso"</span>: <span class="s">"whatsapp"</span>,
+  <span class="k">"status"</span>: <span class="ok">"confirmado"</span>
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track"><div class="grupo"><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b></div><div class="grupo"><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b><span>Life Digital Studio</span><b>//</b></div></div></div>
+
+  <section id="vantagens">
+    <div class="wrap">
+      <h2>Por que o seu negócio precisa de um site profissional?</h2>
+      <p class="sub">Empresas que possuem presença digital estruturada vendem mais, transmitem mais confiança e automatizam o atendimento.</p>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="num">+40%</div>
+          <p>Aumento médio no faturamento total ao ter uma vitrine 24 horas por dia.</p>
+        </div>
+        <div class="stat-card">
+          <div class="num">+65%</div>
+          <p>De novos clientes vindos de pesquisas no Google e redes sociais.</p>
+        </div>
+        <div class="stat-card">
+          <div class="num">8 out 10</div>
+          <p>Consumidores pesquisam na internet antes de comprar ou contratar qualquer serviço local.</p>
+        </div>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <span class="icon">⚡</span>
+          <h3>Vendas no Automático</h3>
+          <p>Seu cliente escolhe os produtos, calcula o pedido e envia tudo pronto diretamente no seu WhatsApp sem você gastar tempo digitando.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="icon">👑</span>
+          <h3>Credibilidade Imediata</h3>
+          <p>Um site próprio transmite profissionalismo. Quem não tem site passa a sensação de negócio amador ou inseguro para novos clientes.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="icon">🎯</span>
+          <h3>Zero Dependência de Algoritmo</h3>
+          <p>Nas redes sociais seu alcance muda todo dia. O seu site é seu terreno próprio, com seu catálogo e seus preços sempre visíveis.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="icon">📍</span>
+          <h3>Atração de Clientes Locais</h3>
+          <p>Apareça para quem está na sua cidade procurando exatamente pelo produto ou serviço que você oferece agora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparativo">
+    <div class="wrap">
+      <h2>Qual é o cenário do seu negócio hoje?</h2>
+      <p class="sub">Veja a diferença entre continuar operando no modelo antigo e ter uma plataforma própria.</p>
+      
+      <div class="compare-container">
+        <div class="compare-box bad">
+          <h3><span class="icon-mark">✕</span> Loja Sem Site</h3>
+          <ul class="compare-list">
+            <li><span class="icon-mark">✕</span> Perde vendas fora do horário comercial (loja "fechada").</li>
+            <li><span class="icon-mark">✕</span> Atendimento lento digitando preços e fotos um por um no WhatsApp.</li>
+            <li><span class="icon-mark">✕</span> Passa menos credibilidade para novos clientes que não te conhecem.</li>
+            <li><span class="icon-mark">✕</span> Fica dependente apenas das oscilações de entregas do Instagram/Facebook.</li>
+            <li><span class="icon-mark">✕</span> Dificuldade para mostrar todo o catálogo de produtos organizadamente.</li>
+          </ul>
+        </div>
+
+        <div class="compare-box good">
+          <h3><span class="icon-mark">✓</span> Loja Com Site (Life Digital)</h3>
+          <ul class="compare-list">
+            <li><span class="icon-mark">✓</span> <strong>Vendas 24/7:</strong> Seu catálogo recebe pedidos mesmo enquanto você dorme.</li>
+            <li><span class="icon-mark">✓</span> <strong>Atendimento Rápido:</strong> O cliente já envia o pedido pronto e calculated para você.</li>
+            <li><span class="icon-mark">✓</span> <strong>Autoridade da Marca:</strong> Transmite confiança total no primeiro clique.</li>
+            <li><span class="icon-mark">✓</span> <strong>Link Único no Perfil:</strong> Facilita a conversão da bio do Instagram em vendas reais.</li>
+            <li><span class="icon-mark">✓</span> <strong>Organização Impecável:</strong> Categorias, fotos, preços e regras claras sem confusão.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <h2>O que desenvolvemos</h2>
+      <p class="sub">Cada projeto é feito sob medida para o seu tipo de negócio, e funciona bem no celular.</p>
+      <div class="services">
+        <div class="service"><h3>Sites</h3><p>Página profissional com seus serviços, preços e contato.</p></div>
+        <div class="service"><h3>Lojas online</h3><p>Vitrine de produtos com carrinho e pedido pelo site.</p></div>
+        <div class="service"><h3>Loja pelo WhatsApp</h3><p>O cliente escolhe os produtos e o pedido chega pronto na sua conversa.</p></div>
+        <div class="service"><h3>Cardápio e delivery</h3><p>Cardápio digital, taxa por distância e painel com PDV de balcão.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <h2>Projetos no ar</h2>
+      <p class="sub">Clique para visitar cada site.</p>
+
+      <article class="project">
+        <div class="shotbox">
+          <div class="bar"><i></i><i></i><i></i><span>nogueiranaildesign.vercel.app</span></div>
+          <div class="shot">
+            <div class="scroll"><div class="m-nail screen">
+              <div class="top"><span>Nogueira Nail Design</span><span class="pill">Agendar</span></div>
+              <div class="body">
+                <div><h4>Sua unha, seu estilo, sua assinatura.</h4><small>Fibra de vidro, gel e modelo F1</small></div>
+                <div class="gal"><b style="background:#c9976a"></b><b style="background:#6f8fd8"></b><b style="background:#8a5cc4"></b></div>
+              </div>
+              <div class="chips"><span>Fibra de vidro R$ 80</span><span>Banho de gel R$ 50</span><span>Modelo F1 R$ 50</span></div>
+            </div>
+              <div class="m-nail screen s2">
+                <div class="top"><span>Nogueira Nail Design</span><span class="pill">Agendar</span></div>
+                <h4>Unhas bem feitas é autoestima</h4>
+                <div class="rows">
+                  <div><span>Pé e mão</span><b>R$ 45,00</b></div>
+                  <div><span>Esmaltação em gel</span><b>R$ 50,00</b></div>
+                  <div><span>Banho de gel</span><b>R$ 50,00</b></div>
+                  <div><span>Fibra de vidro</span><b>R$ 80,00</b></div>
+                  <div><span>Modelo F1</span><b>R$ 50,00</b></div>
+                </div>
+              </div>
+            </div>
+            <img class="real" src="img/nogueira.png" alt="" onerror="this.remove()">
+            <video class="real" data-nome="nogueira" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+            <a class="cover" href="https://nogueiranaildesign.vercel.app/" target="_blank" rel="noopener" aria-label="Visitar o site Nogueira Nail Design"></a>
+          </div>
+        </div>
+        <div>
+          <h3>Nogueira Nail Design</h3>
+          <div class="tags"><span>site</span><span>agendamento</span><span>whatsapp</span></div>
+          <p>Site para nail designer com tabela de preços, galeria de trabalhos e agendamento direto pelo WhatsApp.</p>
+          <a class="link" href="https://nogueiranaildesign.vercel.app/" target="_blank" rel="noopener">Visitar site</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shotbox">
+          <div class="bar"><i></i><i></i><i></i><span>alvesadega.vercel.app</span></div>
+          <div class="shot">
+            <div class="scroll">
+              <div class="m-adega screen">
+                <div class="top"><span class="dot"></span><span>Alves Adega</span><span class="open">Aberto agora</span></div>
+                <h4>Sua bebida gelada entregue na sua porta</h4>
+                <div class="cats"><span>Cervejas</span><span>Vinhos</span><span>Destilados</span></div>
+                <div class="grid"><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div></div>
+              </div>
+              <div class="m-adega screen s2">
+                <div class="top"><span class="dot"></span><span>Alves Adega</span><span class="open">Aberto agora</span></div>
+                <h4>Cervejas</h4>
+                <div class="grid"><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div><div><i></i><i></i></div></div>
+              </div>
+            </div>
+            <div class="m-adega" style="position:absolute;inset:auto 0 0 0;padding:0;background:none;pointer-events:none"><div class="cart" style="pointer-events:none"><span>Ver Carrinho</span><span>R$ 0,00</span></div></div>
+            <img class="real" src="img/alvesadega.png" alt="" onerror="this.remove()">
+            <video class="real" data-nome="alvesadega" autoplay muted loop playsinline preload="metadata" aria-hidden="true" style="background:#0e0e0e"></video>
+            <a class="cover" href="https://alvesadega.vercel.app/" target="_blank" rel="noopener" aria-label="Visitar o site Alves Adega"></a>
+          </div>
+        </div>
+        <div>
+          <h3>Alves Adega</h3>
+          <div class="tags"><span>delivery</span><span>pdv balcão</span><span>painel de gestão</span></div>
+          <p>Cardápio de delivery com verificação de idade, carrinho, taxa de entrega por distância e acompanhamento do pedido. A adega ainda tem painel com pedidos, estoque, relatórios e venda no balcão.</p>
+          <a class="link" href="https://alvesadega.vercel.app/" target="_blank" rel="noopener">Visitar site</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="precos">
+    <div class="wrap">
+      <h2>Quanto custa</h2>
+      <p class="sub">Valores claros, sem surpresa. Parcelamos no cartão em até 2x sem juros.</p>
+      <div class="plans">
+        <div class="plan"><h3>Site simples</h3><div class="price">R$ 250</div><p>Seu negócio com página própria, pronta para celular e computador.</p></div>
+        <div class="plan main"><h3>Site + WhatsApp</h3><div class="price">R$ 500</div><p>Tudo do site simples, com WhatsApp integrado para o cliente falar com você em um toque.</p></div>
+        <div class="plan"><h3>Loja, cardápio ou sistema</h3><div class="price">Sob consulta</div><p>Loja online, cardápio digital e delivery com painel. Conte o que você precisa e receba um orçamento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <h2>Vamos colocar seu negócio no ar?</h2>
+      <p class="sub">Chame no WhatsApp, conte o que você vende e receba uma proposta.</p>
+      <div class="actions">
+        <a class="btn" data-wa href="#">Falar no WhatsApp</a>
+        <a class="btn ghost" href="https://www.instagram.com/lifedigitalstudio00/" target="_blank" rel="noopener">Instagram @lifedigitalstudio00</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Life Digital Studio · <a href="https://www.instagram.com/lifedigitalstudio00/" target="_blank" rel="noopener">@lifedigitalstudio00</a></div></footer>
+
+<script>
+  // TROQUE pelo seu número: 55 + DDD + número, só dígitos
+  var WHATSAPP = "5511999999999";
+  var msg = encodeURIComponent("Olá! Vi o site da Life Digital Studio e quero um site para o meu negócio.");
+  document.querySelectorAll("[data-wa]").forEach(function(a){
+    a.href = "https://wa.me/" + WHATSAPP + "?text=" + msg;
+    a.target = "_blank"; a.rel = "noopener";
+  });
+
+  // Fundo: dados trafegando de um lado para o outro
+  (function(){
+    var cv=document.getElementById("fluxo"), cx=cv.getContext("2d");
+    var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var W,H,lanes=[],GAP=34,dpr=Math.min(window.devicePixelRatio||1,2);
+    function rnd(a,b){return a+Math.random()*(b-a)}
+    function bits(n){var t="";for(var i=0;i<n;i++)t+=Math.random()<.5?"0":"1";return t}
+    function packet(dir){var n=Math.floor(rnd(6,15));return{x:rnd(-200,W),n:n,t:bits(n),d:dir,v:rnd(.5,2.2)*dir}}
+    function build(){
+      W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+      lanes=[];
+      for(var y=GAP/2,i=0;y<H;y+=GAP,i++){
+        var dir=i%2?1:-1,k=Math.max(1,Math.round(W/700)),ps=[];
+        for(var j=0;j<k;j++)ps.push(packet(dir));
+        lanes.push({y:y,p:ps});
+      }
+    }
+    function draw(){
+      cx.clearRect(0,0,W,H);
+      cx.font="12px 'JetBrains Mono',ui-monospace,Menlo,monospace";cx.textBaseline="middle";
+      for(var i=0;i<lanes.length;i++){
+        var L=lanes[i];
+        cx.fillStyle="rgba(56,189,248,.05)";cx.fillRect(0,L.y,W,1);
+        for(var j=0;j<L.p.length;j++){
+          var q=L.p[j];
+          if(!reduce){
+            q.x+=q.v;
+            if(Math.random()<.04){var c=Math.floor(Math.random()*q.n);q.t=q.t.substring(0,c)+(Math.random()<.5?"0":"1")+q.t.substring(c+1)}
+            if(q.d>0&&q.x>W+20){q.x=-q.n*8-rnd(0,300);q.v=rnd(.5,2.2)}
+            if(q.d<0&&q.x<-q.n*8-20){q.x=W+rnd(20,300);q.v=-rnd(.5,2.2)}
+          }
+          for(var k=0;k<q.n;k++){
+            var head=q.d>0?q.n-1-k:k;   // 0 = ponta da frente
+            var a=Math.max(.06,.55-head*.045);
+            cx.fillStyle="rgba(56,189,248,"+a+")";
+            cx.fillText(q.t.charAt(k),q.x+k*8,L.y);
+          }
+        }
+      }
+      if(!reduce)requestAnimationFrame(draw);
+    }
+    addEventListener("resize",function(){build();if(reduce)draw()});
+    build();draw();
+  })();
+
+  // Vídeos: procura em videos/ e também na mesma pasta do index.html
+  document.querySelectorAll("video[data-nome]").forEach(function(v){
+    var n=v.dataset.nome, vids=["videos/"+n+".mp4", n+".mp4"], posters=["videos/"+n+"-poster.jpg", n+"-poster.jpg"], i=0;
+    (function tentaPoster(k){
+      if(k>=posters.length) return;
+      var im=new Image(); im.onload=function(){v.poster=posters[k]}; im.onerror=function(){tentaPoster(k+1)}; im.src=posters[k];
+    })(0);
+    function tenta(){
+      if(i>=vids.length){v.remove();return}
+      v.src=vids[i++]; v.load(); var p=v.play(); if(p&&p.catch)p.catch(function(){});
+    }
+    v.addEventListener("error",tenta);
+    tenta();
+  });
+</script>
+</body>
+</html>
